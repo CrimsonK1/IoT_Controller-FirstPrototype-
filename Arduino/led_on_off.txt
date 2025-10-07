@@ -1,0 +1,43 @@
+//This code must be uploaded to the Arduino UNO board using Arduino IDE
+#include <SoftwareSerial.h>
+
+// Pins for bluetooth communication (RX, TX)
+SoftwareSerial btSerial(10, 11); // Arduino RX <- HC-05 TX, Arduino TX -> HC-05 RX
+
+const int ledPin = 7; // Pin for the LED
+char btState;         // Variable to store the recived state ON/OFF
+
+void setup() {
+  // Serial communication for depuration
+  Serial.begin(9600);
+  Serial.println("Arduino listo para recibir comandos.");
+
+  // Serial communication with HC bluetooth module
+  btSerial.begin(9600); // Default configuration for HC
+
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, LOW); //LED starts being off
+}
+
+void loop() {
+  // If there's data aviable for reading from HC module
+  if (btSerial.available() > 0) {
+    // ...lee el dato entrante y guárdalo en la variable 'btState'
+    // Read the data and store it in the state variable 
+    btState = btSerial.read();
+
+    Serial.print("Dato recibido: ");
+    Serial.println(btState);
+
+    // The received data is checked. 
+    if (btState == 'O') {
+      digitalWrite(ledPin, HIGH);
+      Serial.println("LED encendido");
+    }
+
+    if (btState == 'F') {
+      digitalWrite(ledPin, LOW);
+      Serial.println("LED apagado");
+    }
+  }
+}

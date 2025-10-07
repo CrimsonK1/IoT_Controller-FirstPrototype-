@@ -1,16 +1,18 @@
-# iot_controller
+# IoT_Controller
 
-A new Flutter project.
+First version of a flutter app that works with Arduino via Bluetooth communication
 
-## Getting Started
+## IMPORTANT
 
-This project is a starting point for a Flutter application.
+It's vital to configure the proper Android permissions to use Bluetooth communication tools and protocols.
+The AndroidManifest.xml in the Android folder of this repository should have everything correctly, but if an exception occurs
+with flutter_bluetooth_serial, a possible solution is to add the namespace configuration manually to the package.
+>Locate the bluetooth serial package in your storage, then follow => flutter_bluetooth_serial-0.4.0\android\build.gradle
+>Find the android {...} and add " namespace 'flutter.bluetooth.serial' " at the beginning without changing anything else
+>In the same package, go to => android\src\main\AndroidManifest.xml
+>Look for the <manifest..> tag, and if you see a line " package="io.github.edufolly.flutterbluetoothserial" ", delete it and don't change anything else.
 
-A few resources to get you started if this is your first Flutter project:
+Everything should be just fine now
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
